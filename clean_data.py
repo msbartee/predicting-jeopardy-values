@@ -1,5 +1,7 @@
 import pandas as pd
-from nltk.corpus import import stopwords
+import numpy as np
+from nltk.corpus import stopwords
+from textblob import Word, TextBlob
 
 def clean_data(df, small=False):
     """
@@ -17,9 +19,10 @@ def clean_data(df, small=False):
 
     # make sure that the answer is a string
     df['Answer'] = df['Answer'].astype(str)
+    df['Question'] = df['Question'].astype(str)
 
     # drop questions with urls in them
-    df.drop(df[df['Question'].str.contains('http')].index, inplace=True)
+    #df.drop(df[df['Question'].str.contains('http')].index, inplace=True)
 
     # double values before show number 3966, when values increased
     df['Value'] *= np.where(df['Show Number'] < 3966, 2, 1)
@@ -34,32 +37,31 @@ def clean_data(df, small=False):
         print("There seems to have been an error correcting the values.")
 
     # drop unneeded columns
-    df.drop(['show number', 'air date'], axis = 1, inplace=True)
+    #df.drop(['Show Number', 'Air Date'], axis = 1, inplace=True)
 
     if small == True:
         df = df.sample(frac=1).reset_index(drop=True)[:5000]
 
     return df
 
+def avg_word(sentence):
+  words = sentence.split()
+  return sum(len(word) for word in words)/len(words)
+
 def featurize(df):
     # create a feature with the word count of the question
-    df['word_count_question'] = df['Question'].apply(lambda x: len(str(x).split(" ")))
+    df['word_count_question'] = df['Question'].apply(lambda x: len(x.split()))
     
     # create a feature with the character count of the question
     df['char_count_question'] = df['Question'].str.len()
-    
-    # create a feature with the average word length
-    def avg_word(sentence):
-      words = sentence.split()
-      return (sum(len(word) for word in words)/len(words))
 
-    df['avg_word_len_question'] = round(df['Question'].apply(lambda x: avg_word(x)),3)
+    #df['avg_word_len_question'] = df['Question'].apply(lambda x: avg_word(x))
     
     # see if there is a date in the question
     df['has_date'] = np.where(df['Question'].str.contains('\d{4}'), 1, 0)
     
     # see if there is a "" in the category
-    # df['has_quotes'] = np.where(df['Category'].str.contains('"'), 1, 0)
+    #df['has_quotes'] = np.where(df['Category'].str.contains('"'), 1, 0)
     
     # remove punctuation
     df['Question'] = df['Question'].str.replace('[^\w\s]','')

@@ -15,7 +15,7 @@ def get_wikipedia_article(df):
     with open('SECRET_API_KEY', 'r') as f:
         SECRET_API_KEY = f.read()
 
-    answers = list(df['Answers'])
+    answers = list(df['Answer'])
     wiki_wiki = wikipediaapi.Wikipedia('en')
     buildargs = {
       'serviceName': 'customsearch',
@@ -106,4 +106,4 @@ def featurize_wikipedia(df):
         print("Working through {} Wikipedia categories".format(len(wikipedia_categories_as_key)))
         for index, cat in enumerate(wikipedia_categories_as_key.keys()):
             print("Progress: {}".format(index/len(wikipedia_categories_as_key)))
-            df[cat] = np.where(df['Answer'].isin(wikipedia_categories_as_key[cat],1,0)
+            df[cat] = np.where(df['Answer'].isin(wikipedia_categories_as_key[cat]),1,0)
