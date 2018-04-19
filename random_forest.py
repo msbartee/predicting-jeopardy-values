@@ -2,11 +2,12 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import export_graphviz
 import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
 
 # https://towardsdatascience.com/random-forest-in-python-24d0893d51c0
 
 
-def random_forest(train_features, train_labels, test_features, test_labels):
+def random_forest_regressor(train_features, train_labels, test_features, test_labels):
     rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
     rf.fit(train_features, train_labels)
 
@@ -27,6 +28,28 @@ def random_forest(train_features, train_labels, test_features, test_labels):
     accuracy = 100 - np.mean(mape)
     print('Accuracy:', round(accuracy, 2), '%.')
 
+    return rf
+
+def random_forest_classifier(X_train, X_test, y_train, y_test):
+    # Create a random forest Classifier. By convention, clf means 'Classifier'
+    clf = RandomForestClassifier(n_jobs=2, random_state=0)
+
+    clf.fit(X_train, y_train)
+
+    clf.predict(X_test)
+
+    # View the predicted probabilities of the first 10 observations
+    clf.predict_proba(X_test)[0:10]
+
+    preds = y_test[clf.predict(X_test)]
+
+    # Create confusion matrix
+    pd.crosstab(y_test, preds, rownames=['Actual'], colnames=['Predicted'])
+
+    # View a list of the features and their importance scores
+    list(zip(X_train, clf.feature_importances_))
+
+    return clf
 
 def make_image_tree():
     # Import tools needed for visualization
