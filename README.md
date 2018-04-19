@@ -12,19 +12,21 @@ In addition, this project could be extended to any test for which the questions 
 * includes the question, answer, value, category, round, show number, and air date
 * by design, the target values are roughly balanced
 
-Fun facts:
+Fun fact:
 
-* China is the most common answer in *Jeopardy!*, followed by Australia
+```
+China is the most common answer in *Jeopardy!*, followed by Australia
+```
 
 ### Data Cleaning
 
 * *Jeopardy!* questions doubled in value in November 2001, so I doubled all values before that time
-* I excluded Daily Double and Final Jeopardy questions, for which the value is determined by the contestant
-* Typical NLP tasks: lowercase, remove punctuation, lemmatization
+* I excluded Daily Double and Final Jeopardy questions, for which the value is determined by the contestant (though this was not always straightforward)
+* Typical NLP tasks: lowercase, remove punctuation, lemmatization, tokenization
 
-Fun Facts:
+More fun facts:
 
-* the most common words in the questions are:
+* the most common words in the *questions* are:
 
 ```
 one        241
@@ -32,39 +34,39 @@ first      188
 name       173
 u          121
 2          117
-city       111
-country    106
+city       111 <--
+country    106 <--
 called      98
-state       91
+state       91 <--
 like        91
 ```
 
-* the most common words in the categories are:
+* the most common words in the *categories* are:
 
 ```
 words       80
-history     73
-world       61
-tv          47
+history     73 <--
+world       61 <--
+tv          47 <--
 century     46
 time        45
-american    45
+american    45 <--
 science     40
 us          39
-movie       37
+movie       37 <--
 ```
 
 * most common bigrams in questions:
 
 ```
-[(('New', 'York'), 309),
-(('became', 'first'), 277),
-(('The', 'first'), 248),
-(('This', 'country'), 246),
+[(('New', 'York'), 309), <--
+(('became', 'first'), 277), <--
+(('The', 'first'), 248), <--
+(('This', 'country'), 246), <--
 (('The', 'name'), 241),
 (('&', 'The'), 194),
-(('capital', 'city'), 160),
-(('This', 'state'), 151),
+(('capital', 'city'), 160), <--
+(('This', 'state'), 151), <--
 (('No.', '1'), 144),
 (('country', 'In'), 134)]
 ```
@@ -72,21 +74,26 @@ movie       37
  * most common trigrams in questions:
 
 ```
-[(('South', 'American', 'country'), 61),
-(('New', 'York', 'City'), 59),
-(('World', 'War', 'II'), 39),
+[(('South', 'American', 'country'), 61), <--
+(('New', 'York', 'City'), 59), <--
+(('World', 'War', 'II'), 39), <--
 (('whose', 'name', 'means'), 38),
-(('became', 'first', 'woman'), 28),
-(('(Sofia', 'Clue', 'Crew'), 27),
-(('(Sarah', 'Clue', 'Crew'), 25),
+(('became', 'first', 'woman'), 28), <--
 (('feet', 'sea', 'level'), 24),
 (('British', 'prime', 'minister'), 23),
-(('(Jimmy', 'Clue', 'Crew'), 22)]
 ```
 
+Without modeling, we already know that we should know:
 
+* countries/states and their capitals
+* "Firsts"
+* TV and movies
+* History
+* New York
 
 ## Feature Generation
+
+There is not a lot we can do with the data directly:
 
 * number of words in question
 * average length of words in question
@@ -99,74 +106,104 @@ movie       37
 
 These were not predictive, not even a little...
 
-* linear regression MSE: 
-
-### Named Entity Recognition
-
-* Spacy can identify people, places, organizations, etc.
-* But too many answers are not recognized
+* linear regression root mean squared error: `577`
+* average prediction: `935`
 
 ### Topic Modeling
 
-* unsupervised
-* could be interesting to uncover non-obvious clusters of knowledge
-* could used predictive value to determine correct number of topics
+* unsupervised methodology
+* can uncover non-obvious clusters of knowledge
+* must choose number of topics a priori, but could use grid search on predictive accuracy and other methods
+* results are unlabeled, reducing interpretability:
 
-However, answers themselves could be categorized without topic modeling:
+```
+ACADEMIA?
+['state','university','son','college','spanish','sea']
 
-  * Emily Dickinson: poets
-  * Albert Einstein: scientists
-  * The Blues Brothers: movies
+NEW YORKERS?
+['new','city','company','york','president']
+
+WHERE PEOPLE ARE FROM?
+['here','continent','composer','region','north']
+
+MUSIC?
+['song','element','paul','prime']
+
+U.S. HISTORY?
+['nation','border','painting','still','Virginia','stand']
+
+WORLD WAR II?
+['during','war','died','world','war','ii','father']
+
+...
+```
 
 ### Wikipedia-Derived Categories
 
-* for every answer in the database, query Wikipedia and get categories:
+However, answers themselves could in theory be categorized without topic modeling. For example:
+
+```
+Emily Dickinson: poets
+Albert Einstein: scientists
+The Blues Brothers: movies
+```
+
+I built an interface to the Wikipedia API to get the categories:
 
 **Moses**:
 
-* '15th-century BC biblical rulers',
-* 'Adoptees',
-* 'Ancient Egyptian Jews',
-* 'Ancient Egyptian princes',
-* 'Angelic visionaries',
-* 'Biblical murderers',
-* 'Book of Exodus',
-* 'Christian royal saints',
-* 'Christian saints from the Old Testament',
-* 'Founders of religions',
-* 'Wonderworkers'
-...
+```
+'15th-century BC biblical rulers',
+'Adoptees',
+'Ancient Egyptian Jews',
+'Ancient Egyptian princes',
+'Angelic visionaries',
+'Biblical murderers',
+'Book of Exodus',
+'Christian royal saints',
+'Christian saints from the Old Testament',
+'Founders of religions',
+'Wonderworkers'
+...but also...
+'Articles flagged for missing citations'
+'Articles with unsourced statements from June 2017'
+```
 
 However:
 
 * what if answer is not a Wikipedia article:
-  * "F-A-N-T-A-S-T-I-K" (cleaner from SC Johnson)
-  * "the ant" vs "Ant"
+
+```
+"F-A-N-T-A-S-T-I-K" (cleaner from SC Johnson)
+"the ant" vs "Ant"
+```
 
 * tried to build fuzzy match algorithm --- did not do well
 * built function to query google custom search API to search Wikipedia for answer --- did really well!
-* dropped categories that appeared in less than 10 rows and more than 25% of total rows
-* dropped non-meaningful categories ("Articles with unsourced statements from June 2017")
+* dropped categories that appeared in less than 50 rows and more than 25% of total rows
+* dropped non-meaningful categories
 * but it's slow and dependent upon connectivity/API responsiveness...up to about 10,000 rows so far
-
 
 ## Exploring the World of *Jeopardy!*
 
 * most common categories overall:
 
+```
 Category:English-language films 
 Category:Grammy Award winners 
 Category:American male film actors 
 Category:American film actresses 
 Category:Presidential Medal of Freedom recipients 
 Category:Member states of the United Nations 
-
+```
 
 ![Word Cloud of All Questions](all.png)
 
+Notice anything interesting?
 
 * most common categories for values of \$500 or less:
 
+```
 Category:American male film actors 547
 Category:States of the United States 979
 Category:Hall of Fame for Great Americans inductees 559
@@ -182,11 +219,13 @@ Category:Male television writers 584
 Category:Princeton University alumni 523
 Category:Free speech activists 515
 Category:Countries in Europe 593
+```
 
 ![Word Cloud of Questions Valued Under 500 Dollars](500.png)
 
 * most common categories for values of \$1,500 or more:
 
+```
 Category:States of the United States 396
 Category:19th-century American politicians 203
 Category:Hall of Fame for Great Americans inductees 240
@@ -209,6 +248,7 @@ Category:Countries in Europe 375
 Category:G20 nations 268
 Category:American billionaires 241
 Category:Progressive Era in the United States 201
+```
 
 ![Word Cloud of Questions Valued Under 1500 Dollars](1500.png)
 
