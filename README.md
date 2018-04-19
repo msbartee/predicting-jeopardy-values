@@ -4,7 +4,7 @@ The goal of this project is to predict the dollar value of *Jeopardy!* Questions
 
 In addition, this project could be extended to any test for which the questions are ordered or assigned points by difficulty, such as standardized tests, giving students a sense of where to prioritize study efforts.
 
-![I knew I should have studied Central Asian Geography!](jeopardy.png)
+![I knew I should have studied Central Asian Geography!](./images/jeopardy.png)
 
 ## The Dataset
 
@@ -99,10 +99,10 @@ There is not a lot we can do with the data directly:
 * average length of words in question
 * frequency in English of words in question or answer
 
-![Average Word Length](average_word_length.png)
-![Number of Words in Question](number_words.png)
-![Average Frequency of Words in Question](avg_freq_words_question.png)
-![Average Frequency of Words in Answer](avg_freq_words_answer.png)
+![Average Word Length](./images/average_word_length.png)
+![Number of Words in Question](./images/number_words.png)
+![Average Frequency of Words in Question](./images/avg_freq_words_question.png)
+![Average Frequency of Words in Answer](./images/avg_freq_words_answer.png)
 
 These were not predictive, not even a little...
 
@@ -197,7 +197,7 @@ Category:Presidential Medal of Freedom recipients
 Category:Member states of the United Nations 
 ```
 
-![Word Cloud of All Questions](all.png)
+![Word Cloud of All Questions](./images/all.png)
 
 Notice anything interesting?
 
@@ -221,7 +221,7 @@ Category:Free speech activists 515
 Category:Countries in Europe 593
 ```
 
-![Word Cloud of Questions Valued Under 500 Dollars](500.png)
+![Word Cloud of Questions Valued Under 500 Dollars](./images/500.png)
 
 * most common categories for values of \$1,500 or more:
 
@@ -250,7 +250,7 @@ Category:American billionaires 241
 Category:Progressive Era in the United States 201
 ```
 
-![Word Cloud of Questions Valued Under 1500 Dollars](1500.png)
+![Word Cloud of Questions Valued Under 1500 Dollars](./images/1500.png)
 
 * most common categories by year
 
