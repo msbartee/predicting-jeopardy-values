@@ -3,6 +3,7 @@ import search_google.api
 import wikipediaapi
 import pickle
 import re
+import os
 
 def get_wikipedia_article(df):
     """
@@ -28,31 +29,34 @@ def get_wikipedia_article(df):
     except:
         wikipedia_articles = {}
 
-
-    for answer in answers:
+    clear = lambda: os.system('clear')
+    for index,answer in enumerate(answers):
+        clear()
+        print("Working on {}".format(answer))
+        print("progress: {}".format(index/len(answers)))
         if answer not in wikipedia_articles:
             page_py = wiki_wiki.page(answer)
             if page_py.exists():
                 wikipedia_articles[answer] = answer
                 get_wikipedia_categories(answer, answer, page_py)
-            else:
-                try:
-                    # Define cseargs for search
-                    cseargs = {
-                      'q': answer,
-                      'cx': '014712677646867345626:3owqempv_5c',
-                      'num': 1
-                    }
-                    results = search_google.api.results(buildargs, cseargs)
-                    url = results.metadata['items'][0]['link']
-                    result = re.findall("wiki\/(.*)$", url)[0]
-                    wikipedia_articles[answer] = result
-                    page_py = wiki_wiki.page(result)
-                    get_wikipedia_categories(answer, result, page_py)
-                except:
-                    print("Google scrape failed for {}".format(answer))
+#            else:
+#                try:
+#                    # Define cseargs for search
+#                    cseargs = {
+#                      'q': answer,
+#                      'cx': '014712677646867345626:3owqempv_5c',
+#                      'num': 1
+#                    }
+#                    results = search_google.api.results(buildargs, cseargs)
+#                    url = results.metadata['items'][0]['link']
+#                    result = re.findall("wiki\/(.*)$", url)[0]
+#                    wikipedia_articles[answer] = result
+#                    page_py = wiki_wiki.page(result)
+#                    get_wikipedia_categories(answer, result, page_py)
+#                except:
+#                    print("Google scrape failed for {}".format(answer))
+        pickle.dump(wikipedia_articles, open("wikipedia_articles.pickle", "wb"))
 
-    pickle.dump(wikipedia_articles, open("wikipedia_articles.pickle", "wb"))
 
 def get_wikipedia_categories(answer, article_name, page_py):
     """
@@ -84,7 +88,7 @@ def get_wikipedia_categories(answer, article_name, page_py):
     pickle.dump(wikipedia_categories, open("wikipedia_categories.pickle", "wb"))
     pickle.dump(wikipedia_categories_as_key, open("wikipedia_categories_as_key.pickle", "wb"))
 
-def featurize_wikipedia(df):
+def featurize_wikipedia(df, category_threshold=5):
     try:
         wikipedia_articles = pickle.load( open("wikipedia_articles.pickle","rb"))
     except:
@@ -106,4 +110,5 @@ def featurize_wikipedia(df):
         print("Working through {} Wikipedia categories".format(len(wikipedia_categories_as_key)))
         for index, cat in enumerate(wikipedia_categories_as_key.keys()):
             print("Progress: {}".format(index/len(wikipedia_categories_as_key)))
-            df[cat] = np.where(df['Answer'].isin(wikipedia_categories_as_key[cat]),1,0)
+            if len(wikipedia_categories_as_keys[cat]) > category_threshold:
+                df[cat] = np.where(df['Answer'].isin(wikipedia_categories_as_key[cat]),1,0)

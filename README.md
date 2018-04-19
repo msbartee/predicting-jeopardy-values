@@ -17,16 +17,47 @@ In addition, this project could be extended to any test for which the questions 
 * *Jeopardy!* questions doubled in value in November 2001, so I doubled all values before that time
 * I excluded Daily Double and Final Jeopardy questions, for which the value is determined by the contestant
 
-### Exploring the World of *Jeopardy!*
+## Feature Generation
+
+* number of words in question
+* average length of words in question
+* frequency in English of words in question or answer
+* not predictive
 
 
-### Basic Features
+![Average Word Length](average_word_length.png)
+![Number of Words in Question](number_words.png)
+![Average Frequency of Words in Question](avg_freq_words_question.png)
 
-### Linear Regression
+
+### Named Entity Recognition
+
+* Spacy can identify people, places, organizations, etc.
+* But too many answers are not recognized
 
 ### Topic Modeling
 
+* unsupervised
+* could used predictive value to determine correct number of topics
+* decided that answers themselves could be categorized without topic modeling, which lacks easy interpretability
+* however, could be interesting to uncover non-obvious clusters of knowledge
 
-### Wikipedia Categories
+### Wikipedia-Derived Categories
 
-### Random Forests
+* for every answer in the database, query Wikipedia and get categories
+* example
+* what if answer is not a Wikipedia article?
+* tried to build fuzzy match algorithm --- did not do well
+* used google custom search API to search Wikipedia for answer --- did really well!
+
+## Exploring the World of *Jeopardy!*
+
+* most common categories by value
+* most common categories by year
+* topic modeling of dataset
+
+## Random Forests
+
+## Simulation
+
+
