@@ -22,13 +22,15 @@ In addition, this project could be extended to any test for which the questions 
 * number of words in question
 * average length of words in question
 * frequency in English of words in question or answer
-* not predictive
-
 
 ![Average Word Length](average_word_length.png)
 ![Number of Words in Question](number_words.png)
 ![Average Frequency of Words in Question](avg_freq_words_question.png)
+![Average Frequency of Words in Answer](avg_freq_words_answer.png)
 
+These were not predictive, not even a little...
+
+* linear regression MSE: 
 
 ### Named Entity Recognition
 
@@ -38,17 +40,43 @@ In addition, this project could be extended to any test for which the questions 
 ### Topic Modeling
 
 * unsupervised
+* could be interesting to uncover non-obvious clusters of knowledge
 * could used predictive value to determine correct number of topics
-* decided that answers themselves could be categorized without topic modeling, which lacks easy interpretability
-* however, could be interesting to uncover non-obvious clusters of knowledge
+
+However, answers themselves could be categorized without topic modeling:
+
+  * Emily Dickinson: poets
+  * Albert Einstein: scientists
+  * The Blues Brothers: movies
 
 ### Wikipedia-Derived Categories
 
-* for every answer in the database, query Wikipedia and get categories
-* example
-* what if answer is not a Wikipedia article?
+* for every answer in the database, query Wikipedia and get categories:
+
+**Moses**:
+
+* '15th-century BC biblical rulers',
+* 'Adoptees',
+* 'Ancient Egyptian Jews',
+* 'Ancient Egyptian princes',
+* 'Angelic visionaries',
+* 'Biblical murderers',
+* 'Book of Exodus',
+* 'Christian royal saints',
+* 'Christian saints from the Old Testament',
+* 'Founders of religions',
+* 'Wonderworkers'
+...
+
+However:
+
+* what if answer is not a Wikipedia article:
+  * "F-A-N-T-A-S-T-I-K" (cleaner from SC Johnson)
+  * "the ant" vs "Ant"
+
 * tried to build fuzzy match algorithm --- did not do well
-* used google custom search API to search Wikipedia for answer --- did really well!
+* built function to query google custom search API to search Wikipedia for answer --- did really well!
+* but it's slow and dependent upon connectivity/API responsiveness...up to about 10,000 rows so far
 
 ## Exploring the World of *Jeopardy!*
 
@@ -57,6 +85,8 @@ In addition, this project could be extended to any test for which the questions 
 * topic modeling of dataset
 
 ## Random Forests
+
+* tried random forest regression and classification algorithms
 
 ## Simulation
 
