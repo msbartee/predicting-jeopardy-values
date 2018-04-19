@@ -15,7 +15,7 @@ In addition, this project could be extended to any test for which the questions 
 Fun fact:
 
 ```
-China is the most common answer in *Jeopardy!*, followed by Australia
+China is the most common answer in Jeopardy!, followed by Australia
 ```
 
 ### Data Cleaning
@@ -262,4 +262,6 @@ Category:Progressive Era in the United States 201
 
 ## Simulation
 
+## Next Steps
 
+* super categories
