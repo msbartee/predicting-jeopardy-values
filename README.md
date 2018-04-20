@@ -317,11 +317,10 @@ G20 nations, Importance: 0.02
 ```
 
 Predicted |	0|	    1
-Actual	||	
------------+-------+----
+Actual	|---|---	
+---|---|---
 0	       | 8370|	584
 1       |	3814|	670
-
 
 ## Next Steps
 
