@@ -333,3 +333,4 @@ Recall: 15%
 * build out all categories/features
 * other models
 * predict on unsupervised topic models
+* explore whether there is no correlation between topic and value...
