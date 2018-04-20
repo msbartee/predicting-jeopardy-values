@@ -125,7 +125,8 @@ These were not predictive, not even a little...
 
 * unsupervised methodology
 * can uncover non-obvious clusters of knowledge
-* must choose number of topics a priori, but could use grid search on predictive accuracy and other methods
+* must choose a priori number of topics
+<!--, but could use grid search on predictive accuracy and other methods-->
 * results are unlabeled, reducing interpretability:
 
 ```
@@ -152,6 +153,7 @@ WORLD WAR II?
 
 ### Wikipedia-Derived Categories
 
+<!--
 However, answers themselves could in theory be categorized without topic modeling. For example:
 
 ```
@@ -159,8 +161,11 @@ Emily Dickinson: poets
 Albert Einstein: scientists
 The Blues Brothers: movies
 ```
+--> 
 
-I built an interface to the Wikipedia API to get the categories:
+I built an interface to the Wikipedia and Google Custom Search APIs to get the categories associated with Wikipedia articles:
+
+<!--categories are basically collections of related Wikipedia articles-->
 
 **Moses**:
 
@@ -180,7 +185,7 @@ I built an interface to the Wikipedia API to get the categories:
 'Articles flagged for missing citations'
 'Articles with unsourced statements from June 2017'
 ```
-
+<!--
 However:
 
 * what if answer is not a Wikipedia article:
@@ -195,6 +200,7 @@ However:
 * dropped categories that appeared in less than 25 observations and more than 500 of total rows
 * dropped non-meaningful categories
 * but feature generation is slow and dependent upon connectivity/API responsiveness...up to about 10,000 rows so far
+-->
 
 ## Exploring the World of *Jeopardy!*
 
@@ -210,20 +216,13 @@ Category:Member states of the United Nations
 ```
 
 <img alt="Word Cloud of All Questions" src="./images/all.png" width='400'>  
-<sub><b>Figure: </b> Word Cloud of All Questions </sub>
-<br><br>
-<br><br>
-
 
 Notice anything interesting?
 
-
-<img alt="Heatmap of Select Categories" src="./images/heat.png" width='400'>  
+<img alt="Heatmap of Select Categories" src="./images/heat5.png" width='400'>  
 <sub><b>Figure: </b> Heatmap of Select Categories </sub>
-<br><br>
-<br><br>
 
-
+<!--
 * most common categories for values of \$500 or less:
 
 ```
@@ -284,6 +283,7 @@ Category:Progressive Era in the United States 201
 * most common categories by year
 
 * topic modeling of dataset
+-->
 
 ## Random Forests
 
