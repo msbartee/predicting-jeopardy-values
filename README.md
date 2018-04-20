@@ -215,12 +215,11 @@ Category:Presidential Medal of Freedom recipients
 Category:Member states of the United Nations 
 ```
 
-<img alt="Word Cloud of All Questions" src="./images/all.png" width='400'>  
+<img alt="Word Cloud of All Questions" src="./images/all.png" width='600'>  
 
 Notice anything interesting?
 
-<img alt="Heatmap of Select Categories" src="./images/heat5.png" width='400'>  
-<img alt="Heatmap of Select Categories" src="./images/heat6.png" width='400'>  
+<img alt="Heatmap of Select Categories" src="./images/heat5.png" width='600'>  
 <sub><b>Figure: </b> Heatmap of Select Categories: TV versus Poets </sub>
 
 <!--
@@ -288,13 +287,15 @@ Category:Progressive Era in the United States 201
 
 ## Random Forests
 
+<!--high feature space-->
+
 ### Regression
 
 Random forest regression not successful on limited feature set:
-~200 features
-~10,000 observations (split 75/25)
+~400 features
+~50,000 observations (split 75/25)
 
-Accuracy: 15.6%
+Accuracy: 15.6% at best
 
 ### Classification
 
@@ -319,3 +320,8 @@ G20 nations, Importance: 0.02
 ## Next Steps
 
 * super categories
+* grid search
+* hyperparameters
+* build out all categories/features
+* other models
+* predict on unsupervised topic models
