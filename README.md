@@ -316,11 +316,12 @@ G20 nations, Importance: 0.02
 20th-century male writers, Importance: 0.02
 ```
 
-Predicted |	0|	    1
-Actual	|---|---	
----|---|---
-0	       | 8370|	584
-1       |	3814|	670
+
+| Actual        | Pred 0        | Pred 1  |
+| ------------- |:-------------:| -------:|
+| 0             | 8370          | 584     |
+| 1             | 3814          | 670     |
+
 
 ## Next Steps
 
