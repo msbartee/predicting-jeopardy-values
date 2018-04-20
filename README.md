@@ -301,21 +301,27 @@ Accuracy: 15.6% at best
 
 * Let's ask an easier question...can I predict if a question will be of high value (\$1,200 or greater)?
 
-~200 features
-~10,000 observations (split 75/25)
+~400 features
+~50,000 observations (split 75/25)
 
-Accuracy: 74%
+Accuracy: 67%
+Precision: 53%
+Recall: 15%
 
-Most Important Features
+Most Important Features:
 
 ```
 G20 nations, Importance: 0.02
 20th-century male writers, Importance: 0.02
 ```
 
-* tried random forest regression and classification algorithms
+```
+Predicted	0	    1
+Actual		
+0	        8370	584
+1       	3814	670
+```
 
-## Simulation
 
 ## Next Steps
 
