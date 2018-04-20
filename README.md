@@ -1,6 +1,10 @@
 # Trivial Pursuit: *Jeopardy!* Questions and the Value of Knowledge
 
-The goal of this project is to predict the dollar value of *Jeopardy!* Questions. This might seem like a trivial endeavor (pun *totally* intended). However, this analysis could tell us a lot about the kind of knowledge that we (or at least the writers of *Jeopardy!*) value in Western society, what is considered common knowledge, and what is considered more difficult.
+The goal of this project is to predict the dollar value of *Jeopardy!* Questions. This might seem like a trivial endeavor (pun *totally* intended). However, this analysis could tell us a lot about:
+
+> What kind of knowledge do we (or at least the writers of *Jeopardy!*) value in Western society?
+
+> What is considered common knowledge, and what is considered more difficult?
 
 In addition, this project could be extended to any test for which the questions are ordered or assigned points by difficulty, such as standardized tests, giving students a sense of where to prioritize study efforts.
 
@@ -180,9 +184,9 @@ However:
 
 * tried to build fuzzy match algorithm --- did not do well
 * built function to query google custom search API to search Wikipedia for answer --- did really well!
-* dropped categories that appeared in less than 50 rows and more than 25% of total rows
+* dropped categories that appeared in less than 25 observations and more than 500 of total rows
 * dropped non-meaningful categories
-* but it's slow and dependent upon connectivity/API responsiveness...up to about 10,000 rows so far
+* but feature generation is slow and dependent upon connectivity/API responsiveness...up to about 10,000 rows so far
 
 ## Exploring the World of *Jeopardy!*
 
@@ -197,9 +201,20 @@ Category:Presidential Medal of Freedom recipients
 Category:Member states of the United Nations 
 ```
 
-![Word Cloud of All Questions](./images/all.png)
+<img alt="Word Cloud of All Questions" src="./images/all.png" width='400'>  
+<sub><b>Figure: </b> Word Cloud of All Questions </sub>
+<br><br>
+<br><br>
+
 
 Notice anything interesting?
+
+
+<img alt="Heatmap of Select Categories" src="./images/heat.png" width='400'>  
+<sub><b>Figure: </b> Heatmap of Select Categories </sub>
+<br><br>
+<br><br>
+
 
 * most common categories for values of \$500 or less:
 
@@ -221,7 +236,10 @@ Category:Free speech activists 515
 Category:Countries in Europe 593
 ```
 
-![Word Cloud of Questions Valued Under 500 Dollars](./images/500.png)
+<img alt="Word Cloud of Questions Under 500 Dollars" src="./images/500.png" width='400'>  
+<sub><b>Figure: </b> Word Cloud of Questions Under 500 Dollars </sub>
+<br><br>
+<br><br>
 
 * most common categories for values of \$1,500 or more:
 
@@ -250,13 +268,40 @@ Category:American billionaires 241
 Category:Progressive Era in the United States 201
 ```
 
-![Word Cloud of Questions Valued Under 1500 Dollars](./images/1500.png)
+<img alt="Word Cloud of Questions Over 1,500 Dollars" src="./images/1500.png" width='400'>  
+<sub><b>Figure: </b> Word Cloud of Questions Over 1,500 Dollars </sub>
+<br><br>
+<br><br>
 
 * most common categories by year
 
 * topic modeling of dataset
 
 ## Random Forests
+
+### Regression
+
+Random forest regression not successful on limited feature set:
+~200 features
+~10,000 observations (split 75/25)
+
+Accuracy: 15.6%
+
+### Classification
+
+* Let's ask an easier question...can I predict if a question will be of high value (\$1,200 or greater)?
+
+~200 features
+~10,000 observations (split 75/25)
+
+Accuracy: 74%
+
+Most Important Features
+
+```
+G20 nations, Importance: 0.02
+20th-century male writers, Importance: 0.02
+```
 
 * tried random forest regression and classification algorithms
 

@@ -3,7 +3,7 @@ import numpy as np
 from nltk.corpus import stopwords
 from textblob import Word, TextBlob
 
-def clean_data(df, small=False):
+def clean_data(df, small=False, classification=False):
     """
     cleans the Jeopardy! csv file so that it has only the categories that are needed.
     """
@@ -39,8 +39,14 @@ def clean_data(df, small=False):
     # drop unneeded columns
     #df.drop(['Show Number', 'Air Date'], axis = 1, inplace=True)
 
-    if small == True:
+    df = df.dropna(axis=1, how='any')
+    df = df.dropna(axis=0, how='any')
+
+    if small:
         df = df.sample(frac=1).reset_index(drop=True)[:5000]
+
+    if classification:
+        df['Value'] = np.where(df['Value'] >= 1200, 1, 0)
 
     return df
 
