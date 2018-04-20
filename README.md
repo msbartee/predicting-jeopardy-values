@@ -215,11 +215,11 @@ Category:Presidential Medal of Freedom recipients
 Category:Member states of the United Nations 
 ```
 
-<img alt="Word Cloud of All Questions" src="./images/all.png" width='600'>  
+<img alt="Word Cloud of All Questions" src="./images/all.png" width='500'>  
 
 Notice anything interesting?
 
-<img alt="Heatmap of Select Categories" src="./images/heat5.png" width='600'>  
+<img alt="Heatmap of Select Categories" src="./images/heat5.png" width='500'>  
 <sub><b>Figure: </b> Heatmap of Select Categories: TV versus Poets </sub>
 
 <!--
