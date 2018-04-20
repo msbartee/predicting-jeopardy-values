@@ -305,9 +305,6 @@ Accuracy: 15.6% at best
 ~400 features
 ~50,000 observations (split 75/25)
 
-Accuracy: 67%
-Precision: 53%
-Recall: 15%
 
 Most Important Features:
 
@@ -316,6 +313,11 @@ G20 nations, Importance: 0.02
 20th-century male writers, Importance: 0.02
 ```
 
+```
+Accuracy: 67%
+Precision: 53%
+Recall: 15%
+```
 
 | Actual        | Pred 0        | Pred 1  |
 | ------------- |:-------------:| -------:|
