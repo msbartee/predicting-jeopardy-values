@@ -14,18 +14,19 @@ In addition, this project could be extended to any test for which the questions 
 
 * approximately 217,000 *Jeopardy!* questions from 1984 to 2012
 * includes the question, answer, value, category, round, show number, and air date
+* values doubled in November, 2001
+* Double Jeopardy and Daily Doubles
+* distribution of target values:
 
 <img alt="Distribution of Target Values" src="./images/y_dist.png" width='400'>  
-<sub><b>Figure: </b> Distribution of Target Values </sub>
-<br><br>
 <br><br>
 
-Fun fact:
+Fun facts:
 
 ```
 China is the most common answer in Jeopardy!
 ```
-
+<!--
 ### Data Cleaning
 
 * *Jeopardy!* questions doubled in value in November 2001, so I doubled all values before that time
@@ -48,6 +49,7 @@ called      98
 state       91 <--
 like        91
 ```
+-->
 
 * the most common words in the *categories* are:
 
@@ -79,6 +81,7 @@ movie       37 <--
 (('country', 'In'), 134)]
 ```
 
+<!--
  * most common trigrams in questions:
 
 ```
@@ -90,10 +93,11 @@ movie       37 <--
 (('feet', 'sea', 'level'), 24),
 (('British', 'prime', 'minister'), 23),
 ```
+-->
 
-Without modeling, we already know that we should know:
+Without modeling, we already know that these are important to know:
 
-* countries/states and their capitals
+* Countries/states and their capitals
 * "Firsts"
 * TV and movies
 * History
