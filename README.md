@@ -35,6 +35,8 @@ China is the most common answer in Jeopardy!
 
 More fun facts:
 
+-->
+
 * the most common words in the *questions* are:
 
 ```
@@ -49,7 +51,6 @@ called      98
 state       91 <--
 like        91
 ```
--->
 
 * the most common words in the *categories* are:
 
@@ -125,9 +126,9 @@ These were not predictive, not even a little...
 
 * unsupervised methodology
 * can uncover non-obvious clusters of knowledge
-* must choose a priori number of topics
+* number of topics chosen a priori 
 <!--, but could use grid search on predictive accuracy and other methods-->
-* results are unlabeled, reducing interpretability:
+* but results are unlabeled, reducing interpretability:
 
 ```
 ACADEMIA?
@@ -315,12 +316,11 @@ G20 nations, Importance: 0.02
 20th-century male writers, Importance: 0.02
 ```
 
-```
-Predicted	0	    1
-Actual		
-0	        8370	584
-1       	3814	670
-```
+Predicted |	0|	    1
+Actual	||	
+-----------+-------+----
+0	       | 8370|	584
+1       |	3814|	670
 
 
 ## Next Steps
