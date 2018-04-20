@@ -220,7 +220,8 @@ Category:Member states of the United Nations
 Notice anything interesting?
 
 <img alt="Heatmap of Select Categories" src="./images/heat5.png" width='400'>  
-<sub><b>Figure: </b> Heatmap of Select Categories </sub>
+<img alt="Heatmap of Select Categories" src="./images/heat6.png" width='400'>  
+<sub><b>Figure: </b> Heatmap of Select Categories: TV versus Poets </sub>
 
 <!--
 * most common categories for values of \$500 or less:
