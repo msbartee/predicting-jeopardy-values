@@ -14,12 +14,16 @@ In addition, this project could be extended to any test for which the questions 
 
 * approximately 217,000 *Jeopardy!* questions from 1984 to 2012
 * includes the question, answer, value, category, round, show number, and air date
-* by design, the target values are roughly balanced
+
+<img alt="Distribution of Target Values" src="./images/y_dist.png" width='400'>  
+<sub><b>Figure: </b> Distribution of Target Values </sub>
+<br><br>
+<br><br>
 
 Fun fact:
 
 ```
-China is the most common answer in Jeopardy!, followed by Australia
+China is the most common answer in Jeopardy!
 ```
 
 ### Data Cleaning
